@@ -1,0 +1,64 @@
+{
+  "expo": {
+    "name": "mobile",
+    "slug": "helpbuddy",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to access your photos",
+        "NSPhotoLibraryAddUsageDescription": "Allow HelpBuddy to save photos"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.anonymous.mobile",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-build-properties",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow HelpBuddy to access your camera"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "mediaLibraryPermission": "Allow HelpBuddy to access your media library",
+          "savePhotosPermission": "Allow HelpBuddy to save photos"
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d8269b7e-03f0-4d0f-898b-8c541b4f0a91"
+      }
+    },
+    "owner": "dinesh_thakuri"
+  }
+}

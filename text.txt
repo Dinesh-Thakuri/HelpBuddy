@@ -1,0 +1,144 @@
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
+        {/* Chat header */}
+        <View style={{ marginTop: 20, paddingHorizontal: 10 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              paddingHorizontal: 10,
+            }}
+          >
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Message");
+                socketServices.socket.disconnect();
+              }}
+            >
+              <Ionicons name="arrow-back-outline" size={30} color="black" />
+            </Pressable>
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={30}
+              color="black"
+            />
+          </View>
+
+          {/* Chat profile info */}
+          <View
+            style={{
+              flexDirection: "row",
+              borderBottomWidth: 2,
+              borderColor: "#6B7280",
+              paddingBottom: 12,
+              alignItems: "center",
+              marginTop: 20,
+              paddingHorizontal: 10,
+            }}
+          >
+            <Image
+              source={{ uri: otherUserInfo.profilePictureUrl }}
+              style={{
+                width: "33%",
+                borderWidth: 1,
+                borderRadius: 8,
+                padding: 12,
+              }}
+            />
+            <View
+              style={{
+                flexDirection: "column",
+                width: "66%",
+                paddingHorizontal: 10,
+              }}
+            >
+              <View style={{ marginLeft: 10 }}>
+                <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                  {otherUserInfo.firstName}
+                </Text>
+                <Text style={{ fontSize: 16 }}>Designation</Text>
+                <Text style={{ fontSize: 14 }}>Last seen 2 hours ago</Text>
+              </View>
+              <Pressable>
+                <AntDesign name="rightcircleo" size={30} color="black" />
+              </Pressable>
+            </View>
+          </View>
+        </View>
+
+        {/* Chat View */}
+        <View style={{ flex: 1, justifyContent: "flex-end" }}>
+          <ScrollView
+            style={{ backgroundColor: "red" }}
+            contentContainerStyle={{ flexDirection: "column-reverse" }}
+          >
+            {oldMessages.map((message, index) => (
+              <View
+                key={index}
+                style={{
+                  flexDirection: "row",
+                  justifyContent:
+                    userId !== message.senderId ? "flex-start" : "flex-end",
+                  marginBottom: 8,
+                  marginLeft: 16,
+                }}
+              >
+                <Text
+                  style={{
+                    paddingHorizontal: 16,
+                    paddingVertical: 8,
+                    backgroundColor:
+                      userId !== message.senderId ? "#E5E7EB" : "#60A5FA",
+                    fontSize: 18,
+                    fontWeight: "bold",
+                    borderRadius: 8,
+                  }}
+                >
+                  {message.message}
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+
+        {/* Input area */}
+        <View style={{ paddingHorizontal: 10 }}>
+          <View
+            style={{ flexDirection: "row", alignItems: "center", padding: 10 }}
+          >
+            <TextInput
+              value={messages}
+              style={{
+                borderWidth: 1,
+                flex: 1,
+                height: 48,
+                borderRadius: 8,
+                padding: 12,
+              }}
+              placeholder="Enter Your Message"
+              onChangeText={(text) => setMessages(text)}
+            />
+            <Pressable onPress={sendMessage}>
+              <Text
+                style={{
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  color: "#3B82F6",
+                  padding: 12,
+                  backgroundColor: "#3B82F6",
+                  marginLeft: 8,
+                  color: "#FFFFFF",
+                }}
+              >
+                Send
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default Chats;
